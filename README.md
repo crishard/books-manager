@@ -1,50 +1,105 @@
-# React + TypeScript + Vite
+# Gerenciador de Livros
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição
 
-Currently, two official plugins are available:
+O **Gerenciador de Livros** é uma aplicação web simples desenvolvida com React para organizar e gerenciar seus livros. Ele permite adicionar, editar, excluir e buscar livros por nome, armazenando os dados localmente no navegador usando LocalStorage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- **Adicionar Livros**: Cadastre livros com título, autor, status, avaliação e resenha.
+- **Editar Livros**: Atualize as informações de um livro existente.
+- **Excluir Livros**: Remova livros da lista.
+- **Buscar Livros**: Pesquise livros pelo nome de forma rápida e eficiente.
+- **Armazenamento Local**: Os dados dos livros são salvos no LocalStorage, garantindo que as informações sejam preservadas mesmo após fechar o navegador.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Estrutura de Dados
 
-- Configure the top-level `parserOptions` property like this:
+A aplicação utiliza a seguinte estrutura para os livros:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```typescript
+export type BookStatus = 'lido' | 'lendo' | 'pendente';
+
+export interface Book {
+  id: string;         // Identificador único do livro
+  title: string;      // Título do livro
+  author: string;     // Autor do livro
+  status: BookStatus; // Status do livro ('lido', 'lendo' ou 'pendente')
+  rating?: number;    // Avaliação opcional (1 a 5)
+  review?: string;    // Resenha opcional
+}
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Tecnologias Utilizadas
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **React**: Biblioteca para construção da interface do usuário.
+- **TypeScript**: Superset do JavaScript que adiciona tipagem estática ao projeto.
+- **LocalStorage**: Armazenamento local no navegador para persistência de dados.
+- **Tailwind CSS**: Framework CSS para estilização.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Como Executar o Projeto
+
+1.**Clone o Repositório**:
+
+ ```bash
+   git clone https://github.com/crishard/books-manager
+   ```
+
+2.**Instale as Dependências**:
+
+   ```bash
+   npm install
+   ```
+
+3.**Inicie o Servidor de Desenvolvimento**:
+
+   ```bash
+   npm start
+   ```
+
+4.Acesse a aplicação no navegador em: `http://localhost:5173`
+
+## Uso
+
+1. Adicione um novo livro preenchendo o formulário com título, autor e status. Campos opcionais incluem avaliação e resenha.
+2. Edite um livro clicando no botão de edição ao lado de cada item na lista.
+3. Exclua um livro clicando no botão de exclusão.
+4. Utilize a barra de busca para filtrar livros pelo título.
+
+## Estrutura do Código
+
+- **Components**: Contém componentes reutilizáveis, como o formulário de livros e a lista de livros.
+- **Hooks**: Gerencia a lógica de estado e interações com o LocalStorage.
+- **Utils**: Funções auxiliares para manipulação de dados.
+
+## Melhorias Futuras
+
+- Adicionar paginação para listas maiores.
+- Implementar um tema escuro.
+- Sincronizar dados com uma API externa para acesso remoto.
+- Adicionar testes unitários e e2e.
+
+## Contribuição
+
+Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
+
+1. Faça um fork do repositório.
+
+2. Crie uma branch para suas alterações:
+
+   ```bash
+   git checkout -b feature/nova-funcionalidade
+   ```
+
+3. Faça o commit das alterações:
+
+   ```bash
+   git commit -m "Adiciona nova funcionalidade"
+   ```
+
+4. Envie para o repositório remoto:
+
+   ```bash
+   git push origin feature/nova-funcionalidade
+   ```
+
+5. Abra um Pull Request.
